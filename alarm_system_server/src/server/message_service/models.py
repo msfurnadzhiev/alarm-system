@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.utils import timezone
+import datetime
 import copy
 
 class Mail:
@@ -74,3 +75,22 @@ class UserBuilder:
     def role(self, role):
         self.user.role = role 
         return self
+
+
+class Record(models.Model):
+
+    userName = models.CharField(max_length=50)
+    userEmail = models.CharField(max_length=50)
+    datetime = models.DateTimeField()
+
+    @staticmethod
+    def create(receiver):
+        return Record.objects.create(
+            userName = receiver.name,
+            userEmail = receiver.email,
+            datetime = datetime.datetime.now(tz=timezone.utc)
+        )
+
+    @staticmethod
+    def remove_all():
+        Record.objects.all().delete()

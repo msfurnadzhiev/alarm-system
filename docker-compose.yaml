@@ -1,35 +1,35 @@
 version: "3.9"
 
-volumes:
-    postgres_data:
-        driver: local
+# volumes:
+#     postgres_data:
+#         driver: local
 
 services:
     
     # Keycloak with Postgres as DB
-    postgres:
-        image: postgres
-        volumes:
-        - postgres_data:/var/lib/postgresql/data
-        environment:
-            POSTGRES_DB: keycloak
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    keycloak:
-        image: jboss/keycloak
-        environment:
-            DB_VENDOR: POSTGRES
-            DB_ADDR: postgres
-            DB_DATABASE: keycloak
-            DB_SCHEMA: public
-            DB_USER: ${POSTGRES_USER}
-            DB_PASSWORD: ${POSTGRES_PASSWORD}
-            KEYCLOAK_USER: ${KEYCLOAK_USER}
-            KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
-        ports:
-            - 8080:8080
-        depends_on:
-            - postgres
+    # postgres:
+    #     image: postgres
+    #     volumes:
+    #     - postgres_data:/var/lib/postgresql/data
+    #     environment:
+    #         POSTGRES_DB: keycloak
+    #         POSTGRES_USER: ${POSTGRES_USER}
+    #         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    # keycloak:
+    #     image: jboss/keycloak
+    #     environment:
+    #         DB_VENDOR: POSTGRES
+    #         DB_ADDR: postgres
+    #         DB_DATABASE: keycloak
+    #         DB_SCHEMA: public
+    #         DB_USER: ${POSTGRES_USER}
+    #         DB_PASSWORD: ${POSTGRES_PASSWORD}
+    #         KEYCLOAK_USER: ${KEYCLOAK_USER}
+    #         KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+    #     ports:
+    #         - 8080:8080
+    #     depends_on:
+    #         - postgres
 
     alarm-system-server:
         build: 

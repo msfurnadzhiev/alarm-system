@@ -1,0 +1,27 @@
+{% load static %}
+{% load render_table from django_tables2 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='UTF-8'>
+    <title>Log Viewer</title>
+    <link rel="stylesheet" href="{% static '/css/logpage.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <h1 class='title'>Alarm Server Log Page</h1>
+    <div class='exports'>
+        <button type="button" class="btn btn-light" onclick="export_as('csv');">CSV</button>
+        <button type="button" class="btn btn-light" onclick="export_as('json');">JSON</button>
+    </div>
+    {% render_table table %}
+</body>
+
+<script>
+    function export_as(type) {
+        var url = window.location.href;    
+        url += '?_export=' + type
+        window.location.href = url;
+    }
+</script>
+</html>

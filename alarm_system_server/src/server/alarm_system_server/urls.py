@@ -19,6 +19,6 @@ from django.urls import path
 from message_service import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('send_message', views.send_message),
+    path('log', views.RecordsTableView.as_view()),
 ]
